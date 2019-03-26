@@ -1,16 +1,20 @@
 
 **Core Packages**
-from rest_framework.views import APIView
-from rest_framework import mixins # Mix all  functions
-from rest_framework import generics # generate APTVIEW
+from django.contrib.auth.models import User
+from rest_framework import permissions
+from snippets.permissions import IsOwnerOrReadOnly
+
 
 **URL Tips**
-Run ......../snippets.api for API view
-Run ......../snippets.json for json response
-Run ......../pk for specific instance
+snippets/
+snippets<drf_format_suffix:format>
+snippets/<int:pk>/
+snippets/<int:pk><drf_format_suffix:format>
+users/
+users<drf_format_suffix:format>
+users/<int:pk>/
+users/<int:pk><drf_format_suffix:format>
+api-auth/
 
 **Learning Points**
-Aim: Simplify process for usual request type (list, post, retrieve, put, delete)
-1. view_one. Basic class type view. No longer need if statement to distinguish method type. 
-2. view_two. Minis and generics class will have same performance by just accepting queryset and serializer_class. 
-3. view_three. All functions are highly dense packaged for only two categories: ListCreateAPIView, RetrieveUpdateDestroyAPIView. 
+Goal to learn: create permission for who can edit or read only. 
