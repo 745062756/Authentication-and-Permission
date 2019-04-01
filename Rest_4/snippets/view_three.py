@@ -11,6 +11,10 @@ class Snippetlist(generics.ListCreateAPIView):
     serializer_class = SnippetSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
 class Snippetdetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
@@ -19,9 +23,6 @@ class Snippetdetail(generics.RetrieveUpdateDestroyAPIView):
 class Userlist(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
